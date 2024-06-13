@@ -1,0 +1,26 @@
+.header {
+  padding: 16px 0;
+}
+.header__breadcrumb,
+.header__breadcrumb-item {
+  display: flex;
+  gap: 15px;
+}
+.header__breadcrumb-item {
+  align-items: center;
+}
+.header--breadcrumb-link {
+  font-size: 14px;
+  line-height: 16px;
+}
+.header--breadcrumb-link:not(.router-link-exact-active) {
+  font-weight: 400;
+  color: var(--dark-blue);
+}
+.header--breadcrumb-link.router-link-exact-active {
+  font-weight: 700;
+  color: var(--blue);
+}
+img {
+  display: block;
+}

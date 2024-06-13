@@ -1,0 +1,10 @@
+.home__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home__title {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--black);
+}
