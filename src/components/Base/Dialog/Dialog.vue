@@ -10,11 +10,10 @@ const showBaseModal = ref<boolean>(false);
 const showContent = ref<boolean>(false);
 
 watch(show, (newValue) => {
+  showBaseModal.value = newValue;
   if (newValue) {
-    showBaseModal.value = newValue;
     document.body.style.overflow = 'hidden';
   } else {
-    showContent.value = newValue;
     document.body.style.overflow = 'unset';
   }
 });

@@ -3,4 +3,11 @@
   --light-blue: #75BAE0;
   --black: #202123;
   --background: #F4F4F4;
+
+  --hover-color: #75BAE0;
+  --light-hover-color: #f3fbff;
+  --succes-color: #85E89D;
+  --light-success-color: #f6fff8;
+  --error-color: #F97583;
+  --light-error-color: #fff2f3;
 }

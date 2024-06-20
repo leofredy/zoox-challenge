@@ -1,0 +1,82 @@
+.drag-area {
+  width: 100%;
+  max-width: 395px;
+  padding: 16px;
+  border-radius: 15px;
+  background-color: #FFF;
+}
+.drag-area__title {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--black);
+  text-align: start;
+}
+.drag-area--cancel-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 0 auto;
+  width: 89px;
+  height: 30px;
+  border: 2px solid var(--black);
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+
+.drag-area__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 15px;
+  width: 100%;
+  height: 164px;
+  max-width: 363px;
+  border-radius: 16px;
+  border: 1px solid #666666; 
+  border-style: dashed;
+  cursor: pointer;
+}
+
+.drag-area__container:hover {
+  background-color: var(--light-hover-color);
+  border-color: var(--light-blue);
+}
+.drag-area__container.valid-highlight {
+  border-color: var(--succes-color);
+  background-color: var(--light-success-color);
+}
+.drag-area__container.invalid-highlight {
+  border-color: var(--error-color);
+  background-color: var(--light-error-color);
+}
+
+.drag-area__p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+
+  pointer-events: none;
+}
+.drag-area--btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 273px;
+  padding: 8.5px 16px;
+  border: 2px solid var(--blue);
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--blue);
+  cursor: pointer;
+  pointer-events: none;
+}
