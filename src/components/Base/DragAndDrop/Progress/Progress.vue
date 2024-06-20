@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { toRefs, computed, watch } from 'vue';
+import { toRefs, computed, } from 'vue';
 import type { Props, Emits } from './types';
 
 import Dialog from '@/components/Base/Dialog/Dialog.vue';
+import type { SaveFile } from '@/types/file';
 
 const emit = defineEmits<Emits>();
 const props = defineProps<Props>();
@@ -11,10 +12,6 @@ const loadedPercentage = computed(() => {
   return ((loaded.value * 100) / size.value);
 });
 
-
-watch(loadedPercentage, (newValue) => {
-  console.log('loadedPercentage', newValue)
-})
 </script>
 
 <template>

@@ -10,4 +10,7 @@
   --light-success-color: #f6fff8;
   --error-color: #F97583;
   --light-error-color: #fff2f3;
+
+  --header-height-size: 48px;
+  --padding-bottom-size: 15px;
 }

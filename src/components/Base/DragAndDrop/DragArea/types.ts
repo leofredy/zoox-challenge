@@ -13,10 +13,6 @@ export interface Emits {
   (e: 'close'): void;
   (e: 'aborted'): void;
   (e: 'error'): void;
+  (e: 'put'): void;
 }
 
-export interface SaveFile {
-  fileName: string;
-  createdAt: number;
-  data: Array<Array<string>>;
-}

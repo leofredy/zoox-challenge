@@ -53,26 +53,32 @@ function readerError() {
 
 <template>
   <div class="draganddrop">
-    <DragArea 
-      :show="show" 
-      :abort-reading="abortReading" 
-      @update="update" 
-      @aborted="abortReading = false" 
-      @error="readerError"
-      @close="emit('close')"
-    />
+    <Teleport to="#teleports">
+      <DragArea 
+        :show="show" 
+        :abort-reading="abortReading" 
+        @update="update" 
+        @aborted="abortReading = false" 
+        @error="readerError"
+        @close="emit('close')"
+        @put="emit('put')"
+      />
+    </Teleport>
+    
 
     <!-- PROGRESS MODAL -->
-     <Progress 
-      v-if="!error"
-      :filename="fileName" 
-      :loaded="fileLoaded" 
-      :size="fileSize" 
-      :show="showProgressModal" 
-      @close="closeProgressModal"
-      @other="readerOtherFile"
-      @cancel="cancelReaderFile"
-    />
+    <Teleport to="#teleports">
+      <Progress 
+        v-if="!error"
+        :filename="fileName" 
+        :loaded="fileLoaded" 
+        :size="fileSize" 
+        :show="showProgressModal" 
+        @close="closeProgressModal"
+        @other="readerOtherFile"
+        @cancel="cancelReaderFile"
+      />
+    </Teleport>
   </div>
 </template>
 

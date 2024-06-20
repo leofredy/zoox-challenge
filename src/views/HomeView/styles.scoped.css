@@ -1,4 +1,11 @@
+.home__container-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: calc(100vh - var(--header-height-size) - var(--padding-bottom-size));
+}
 .home__top {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,4 +14,13 @@
   font-size: 17px;
   font-weight: 300;
   color: var(--black);
+}
+.home__content {
+  flex: 1 0;
+  overflow-y: auto;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+}
+.home__no-tables {
+  height: 100%;
 }

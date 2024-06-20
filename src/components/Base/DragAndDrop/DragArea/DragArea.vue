@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { ref, toRefs, watch } from 'vue';
-import type { Emits, SaveFile, Props } from './types';
+import type { SaveFile } from '@/types/file';
+import type { Emits, Props } from './types';
 
 import Dialog from '@/components/Base/Dialog/Dialog.vue';
+import { useSpreadsheet } from '@/composables/useSpreadsheet';
 
 const props = defineProps<Props>();
 const { abortReading, show } = toRefs(props);
 const emit = defineEmits<Emits>();
+
+const { csvToJSON, xlsxToJSON } = useSpreadsheet();
 
 const dropAreaDOM = ref<HTMLLabelElement>();
 
@@ -17,6 +22,8 @@ watch(abortReading, (newValue) => {
     emit('aborted');
   }
 })
+
+const router = useRouter();
 
 async function changeInput(event: Event) {
   const inputDOM = (event.target as HTMLInputElement);
@@ -33,7 +40,10 @@ function dropEvent(event: DragEvent) {
   }
 }
 function dragEnterEvent(event: DragEvent) {
-  highlight(event.dataTransfer?.items[0].type === 'text/csv');
+  highlight(
+    event.dataTransfer?.items[0].type === 'text/csv' || 
+    event.dataTransfer?.items[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  );
 }
 function dragLeaveEvent() {
   unhighlight();
@@ -46,7 +56,7 @@ function highlight(status: boolean) {
   status ? dropAreaDOM.value?.classList.add('valid-highlight') : dropAreaDOM.value?.classList.add('invalid-highlight')
 }
 async function readFile(file: File): Promise<void> {
-  if (file.type === 'text/csv') {
+  if (file.type === 'text/csv' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
     emit('update', {
       fileName: file.name,
       fileSize: file.size,
@@ -58,25 +68,42 @@ async function readFile(file: File): Promise<void> {
       reader.value = new FileReader();
       reader.value.onload = (e) => {
         if (e.target?.result) {
+          let fileOnJSON: Array<Array<string>>;
 
-          const csvOnJSON = csvToJSON(e.target.result as string);
+          if (file.type === 'text/csv') {
+            fileOnJSON = csvToJSON(e.target.result as string);
+          }
+          else {
+            fileOnJSON = xlsxToJSON(e.target.result as ArrayBuffer);
+          }
 
           try {
-            save({
-              fileName: file.name,
-              data: csvOnJSON,
-              createdAt: file.lastModified
-            });
-          } catch(e) {
-            emit('error');
-            if (e instanceof DOMException) {
-              if (e.name === 'QuotaExceededError') {
-                if (confirm('Você consumiu 100% de seu espaço, limpe e faça o upload novamente. Deseja limpar?')) {
-                  localStorage.removeItem('files');
+              save({
+                fileName: file.name,
+                data: fileOnJSON,
+                createdAt: file.lastModified,
+                exported: false,
+                recordCount: {
+                  lines: 0,
+                  columns: 0
                 }
-              } 
+              });
+
+              const jsonFiles = localStorage.getItem('files');
+              if (jsonFiles) {
+                const files = (JSON.parse(jsonFiles) as Array<SaveFile>);
+                router.push(`/detail/${files.length - 1}`);
+              }
+            } catch(e) {
+              emit('error');
+              if (e instanceof DOMException) {
+                if (e.name === 'QuotaExceededError') {
+                  if (confirm('Você consumiu 100% de seu espaço, limpe e faça o upload novamente. Deseja limpar?')) {
+                    localStorage.removeItem('files');
+                  }
+                } 
+              }
             }
-          }
         }
 
         resolve(e);
@@ -89,14 +116,14 @@ async function readFile(file: File): Promise<void> {
           showProgressModal: true
         });
       }
-      reader.value.readAsText(file);
+      if (file.type === 'text/csv') {
+        reader.value.readAsText(file);
+      }
+      else {
+        reader.value.readAsArrayBuffer(file);
+      }
     })
   }
-}
-function csvToJSON(stringFile: string) {
-  const lines = stringFile.split("\r" + "\n")
-  const table = lines.map(line => line.split(','))
-  return table;
 }
 function save(file: SaveFile) {
   const currentFiles = localStorage.getItem('files');
@@ -104,8 +131,9 @@ function save(file: SaveFile) {
     localStorage.setItem('files', JSON.stringify([file]));
   }
   else {
-    localStorage.setItem('files', JSON.stringify([...currentFiles, file]));
+    localStorage.setItem('files', JSON.stringify([...JSON.parse(currentFiles), file]));
   }
+  emit('put');
 }
 </script>
 
