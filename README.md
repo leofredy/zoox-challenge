@@ -1,7 +1,7 @@
 ### Pré-requisitos
 
-Node.js 20.0.0 (https://nodejs.org).
-Arquivos para teste disponivel no projeto, em: "./tests/files"
+- Node.js 20.0.0 (https://nodejs.org).
+- Arquivos para teste disponivel no projeto, em: "./tests/files"
 
 ### Instalação
 
@@ -15,4 +15,3 @@ Arquivos para teste disponivel no projeto, em: "./tests/files"
 ```bash
     npm run dev.
 ```
-### Testes
