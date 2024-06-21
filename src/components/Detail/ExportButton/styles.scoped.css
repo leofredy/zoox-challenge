@@ -10,3 +10,42 @@
   font-size: 13px;
   color: var(--black);
 }
+
+.export-confirm__content {
+  padding: 16px;
+  width: 100%;
+  max-width: 273px;
+  background-color: #FFF;
+  border-radius: 15px;
+}
+.export-confirm__title {
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: #202123;
+}
+.export-confirm__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.export-confirm--cancel-btn {
+  border-radius: 15px;
+  border: 2px solid #202123;
+  height: 30px;
+  width: 89px;
+  font-size: 11px;
+  color: #202123;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.export-confirm--yes {
+  width: 52px;
+  height: 30px;
+  border-radius: 15px;
+  text-transform: uppercase;
+  background-color: #202123;
+  font-size: 11px;
+  color: #FFFFFF;
+  font-weight: 700;
+  border: none;
+}

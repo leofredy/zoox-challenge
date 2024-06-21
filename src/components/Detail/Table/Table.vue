@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed, ref, toRefs, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 import type { Props, Emits } from './types';
 
 import Checkbox from '@/components/Base/Checkbox/Checkbox.vue';
