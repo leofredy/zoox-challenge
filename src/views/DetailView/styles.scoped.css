@@ -17,9 +17,18 @@
 .detail__content {
   border-radius: 16px;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  overflow: auto;
+}
+.detail__content::-webkit-scrollbar {
+  display: none;
 }
 .detail__table {
   width: 100%;
   height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .detail__content {
+    overflow: hidden;
+  }
 }

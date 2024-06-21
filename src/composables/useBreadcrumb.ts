@@ -12,14 +12,17 @@ export function useBreadcrumb() {
     () => route.matched,
     () => {
       if (route.matched) {
-        breadcrumb.value = route.meta.breadcrumb.map((breadcrumbItem, breadcrumbItemIndex) => {
+        breadcrumb.value = route?.meta?.breadcrumb?.map((breadcrumbItem, breadcrumbItemIndex) => {
           return {
             label: breadcrumbItem,
             current: (route.meta.breadcrumb.length - 1 === breadcrumbItemIndex),
             path: breadcrumbItemIndex === 0 ? '/' : route.path
           }
-        })
+        }) || [];
       }
+    },
+    {
+      immediate: true
     }
   );
 

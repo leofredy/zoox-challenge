@@ -9,6 +9,7 @@ export interface ViewFile {
         }
       >
   }>;
+  id: number;
   fileName: string;
   createdAt: number;
   exported: boolean;

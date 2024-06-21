@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed, toRefs, ref } from 'vue';
+import { computed, toRefs, ref } from 'vue';
 import type { Props, Emits } from './types';
 
 import ToggleSwitch from '@/components/Base/ToggleSwitch/ToggleSwitch.vue';

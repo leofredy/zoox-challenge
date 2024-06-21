@@ -3,7 +3,6 @@ import { toRefs, computed, } from 'vue';
 import type { Props, Emits } from './types';
 
 import Dialog from '@/components/Base/Dialog/Dialog.vue';
-import type { SaveFile } from '@/types/file';
 
 const emit = defineEmits<Emits>();
 const props = defineProps<Props>();

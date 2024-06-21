@@ -26,6 +26,7 @@ function getFile() {
     if (foundFile) {
       file.value = {
         ...foundFile,
+        id: parseInt(slug),
         data: [
           ...foundFile.data.map((line, lineIndex) => {
             return { 
