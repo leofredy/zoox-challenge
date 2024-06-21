@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { defineProps, computed, toRefs } from 'vue';
+import { computed, toRefs, ref } from 'vue';
 import type { Props } from './types';
+
+import Dialog from '@/components/Base/Dialog/Dialog.vue';
 
 import { useSpreadsheet } from '@/composables/useSpreadsheet';
 
 const props = defineProps<Props>();
+const confirmExport = ref<boolean>(false);
 const { file } = toRefs(props);
 
 const selectedLinesAndColumns = computed(() => {
@@ -27,6 +30,7 @@ const selectedLinesAndColumns = computed(() => {
 
 const { jsonToCsv, jsonToXlsx } = useSpreadsheet();
 function downloadFile() {
+  confirmExport.value = false;
   const link = document.createElement('a');
   link.setAttribute('download', file.value.fileName);
 
@@ -38,13 +42,33 @@ function downloadFile() {
   }
 
   link.click();
+  
 }
 </script>
 
 <template>
-  <button class="export-button" @click="downloadFile">
+  <button class="export-button" @click="confirmExport = true">
     <img src="./img/export.svg" width="12" height="12">
     Exportar tabela
+
+    <Teleport to="#teleports">
+      <Dialog :show="confirmExport" class="export-confirm" @close="confirmExport = false">
+        <div class="export-confirm__content">
+          <p class="export-confirm__title">
+            Deseja exportar e baixar a tabela?
+          </p>
+
+          <div class="export-confirm__buttons">
+            <button @click="confirmExport = false" class="export-confirm--cancel-btn">
+              Cancelar
+            </button>
+            <button @click="downloadFile" class="export-confirm--yes" >
+              Sim
+            </button>
+          </div>
+        </div>
+      </Dialog>
+    </Teleport>
   </button>
 </template>
 
