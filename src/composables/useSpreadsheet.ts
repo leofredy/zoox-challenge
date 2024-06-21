@@ -1,5 +1,4 @@
 import * as xlsx from 'xlsx';
-import Papa from "papaparse";
 
 interface XLSXLine {
   [key: string]: string; 
@@ -12,7 +11,7 @@ export function useSpreadsheet() {
     const table = lines.map(line => line.split(','))
     return table;
   }
-  
+
   function jsonToCsv(jsonfile: Array<Array<string>>) {
     const csvContent = jsonfile
     .map((row) => Object.values(row).join(","))
