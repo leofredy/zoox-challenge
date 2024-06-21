@@ -9,13 +9,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { breadcrumb: 'Início' }
+      meta: { breadcrumb: ['Início'] }
     },
     {
       path: '/detail/:slug',
       name: 'detail',
       component: () => import(/*  */ '../views/DetailView/DetailView.vue'),
-      meta: { breadcrumb: 'Detalhe do CSV' }
+      meta: { breadcrumb: ['Início', 'Detalhe do CSV'] }
     }
   ]
 })

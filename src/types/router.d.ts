@@ -4,6 +4,6 @@ export {}
 
 declare module 'vue-router' {
   interface RouteMeta {
-    breadcrumb: string;
+    breadcrumb: Array<string>;
   }
 }

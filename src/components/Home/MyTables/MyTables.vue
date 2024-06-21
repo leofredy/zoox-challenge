@@ -22,7 +22,7 @@ function downloadFile(file: SavedFile) {
   link.setAttribute('download', file.fileName);
 
   if (file.fileName.split('.')[file.fileName.split('.').length - 1] === 'csv') {
-    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(jsonToCsv(file.data)));
+    link.href = jsonToCsv(file.data);
   } 
   else {
     jsonToXlsx(file.data, file.fileName);

@@ -12,11 +12,11 @@ export function useBreadcrumb() {
     () => route.matched,
     () => {
       if (route.matched) {
-        breadcrumb.value = route.matched.map((matchedItem, matchedItemIndex) => {
+        breadcrumb.value = route.meta.breadcrumb.map((breadcrumbItem, breadcrumbItemIndex) => {
           return {
-            label: matchedItem.meta.breadcrumb,
-            current: matchedItemIndex === (route.matched.length - 1),
-            path: matchedItem.path
+            label: breadcrumbItem,
+            current: (route.meta.breadcrumb.length - 1 === breadcrumbItemIndex),
+            path: breadcrumbItemIndex === 0 ? '/' : route.path
           }
         })
       }

@@ -1,0 +1,84 @@
+.filter {
+  position: relative;
+  z-index: 1;
+}
+.filter--btn {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  height: 21px;
+  width: 80px;
+  border-radius: 15px;
+  border: 1px solid #202123;
+  font-size: 13px;
+  color: #202123;
+}
+
+.filter__options {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 0;
+  padding: 16px;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+}
+
+.filter__options::after {
+  content: "";
+  background-image: url("./img/arrow.svg");
+  position: absolute;
+  top: -8px;
+  left: 36px;
+  z-index: 0;
+  width: 20px;
+  height: 20px;
+}
+.filter__fixed-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter--see-all-btn,
+.filter--see-nothing-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none; 
+  font-size: 13px;
+  color: #202123;
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+.filter--see-all-btn img,
+.filter--see-nothing-btn img {
+  display: block;
+  width: 16px;
+}
+
+.filter__column-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #DDDDDDDD;
+}
+.filter__column-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter__column-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #202123;
+  text-wrap: nowrap;
+}
+.filter__column-label img {
+  display: block;
+  width: 16px;
+}

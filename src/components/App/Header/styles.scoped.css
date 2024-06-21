@@ -12,14 +12,13 @@
 .header--breadcrumb-link {
   font-size: 14px;
   line-height: 16px;
-}
-.header--breadcrumb-link:not(.router-link-exact-active) {
-  font-weight: 400;
-  color: var(--dark-blue);
-}
-.header--breadcrumb-link.router-link-exact-active {
-  font-weight: 700;
   color: var(--blue);
+}
+.header--breadcrumb-link:not(.current) {
+  font-weight: 400;
+}
+.header--breadcrumb-link.current {
+  font-weight: 700;
 }
 img {
   display: block;

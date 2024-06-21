@@ -1,4 +1,5 @@
 import * as xlsx from 'xlsx';
+import Papa from "papaparse";
 
 interface XLSXLine {
   [key: string]: string; 
@@ -11,11 +12,14 @@ export function useSpreadsheet() {
     const table = lines.map(line => line.split(','))
     return table;
   }
-
+  
   function jsonToCsv(jsonfile: Array<Array<string>>) {
-    const csvFile = encodeURIComponent(jsonfile.map(line => line.join(',')).join("\r" + "\n"));
-    return csvFile;
-  }
+    const csvContent = jsonfile
+    .map((row) => Object.values(row).join(","))
+    .join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    return URL.createObjectURL(blob);
+  };
 
   function xlsxToJSON(bufferFile: ArrayBuffer): Array<Array<string>> {
     const workbook = xlsx.read(bufferFile, { cellDates: true, cellText: true });

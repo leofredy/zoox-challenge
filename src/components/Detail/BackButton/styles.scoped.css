@@ -1,0 +1,12 @@
+.back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #202123;
+  border-radius: 15px;
+  width: 67px;
+  height: 21px;
+  font-size: 13px;
+  color: var(--black);
+}

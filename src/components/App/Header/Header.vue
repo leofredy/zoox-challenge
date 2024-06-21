@@ -13,7 +13,7 @@ const { breadcrumb } = useBreadcrumb();
         :key="breadcrumbItemIndex"
         class="header__breadcrumb-item"
       >
-        <RouterLink :to="breadcrumbItem.path" class="header--breadcrumb-link">
+        <RouterLink :to="breadcrumbItem.path" :class="['header--breadcrumb-link', { current: breadcrumbItem.current }]">
           {{ breadcrumbItem.label }}
         </RouterLink>
 

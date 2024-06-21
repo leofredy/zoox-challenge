@@ -1,0 +1,33 @@
+table {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+table, th, td {
+  border-collapse: collapse;
+}
+th {
+  padding: 19.2px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #202123;
+  text-wrap: nowrap;
+  text-align: start;
+}
+.table__column-checkbox {
+  width: 74px;
+}
+td {
+  padding: 15px 16px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #202123;
+  text-wrap: nowrap;
+  text-align: start;
+}
+tr:not(:last-child) {
+  border-bottom: 1px solid #DDDDDD;
+}
+th:not(:last-child), td:not(:last-child) {
+  border-right: 1px solid #DDDDDD;
+}
