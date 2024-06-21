@@ -9,6 +9,13 @@
   height: 21px;
   font-size: 13px;
   color: var(--black);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.export-button:disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.3;
 }
 
 .export-confirm__content {

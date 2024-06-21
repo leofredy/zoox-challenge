@@ -5,11 +5,11 @@ import type { Props } from './types';
 import Dialog from '@/components/Base/Dialog/Dialog.vue';
 
 import { useSpreadsheet } from '@/composables/useSpreadsheet';
+import type { SaveFile } from '@/types/file';
 
 const props = defineProps<Props>();
 const confirmExport = ref<boolean>(false);
 const { file } = toRefs(props);
-
 const selectedLinesAndColumns = computed(() => {
   return file.value.data
   .map(line => {
@@ -28,6 +28,13 @@ const selectedLinesAndColumns = computed(() => {
   });
 });
 
+const hasLineAndColumns = computed(() => {
+  if (selectedLinesAndColumns.value.length > 1) {
+    return selectedLinesAndColumns.value[0].length;
+  }
+  return false;
+});
+
 const { jsonToCsv, jsonToXlsx } = useSpreadsheet();
 function downloadFile() {
   confirmExport.value = false;
@@ -42,12 +49,30 @@ function downloadFile() {
   }
 
   link.click();
+
+
+  const jsonfiles = localStorage.getItem('files');
+  const files = JSON.parse(jsonfiles!) as Array<SaveFile>;
+  const lines = selectedLinesAndColumns.value.length;
+  const columns = selectedLinesAndColumns.value[0].length;
+  const updateFiles = files.map((f, fIndex) => {
+    return { 
+      ...f, 
+      exported: fIndex === file.value.id,
+      recordCount: {
+        ...f.recordCount,
+        columns,
+        lines
+      }
+    }
+  });
+  localStorage.setItem('files', JSON.stringify(updateFiles));
   
 }
 </script>
 
 <template>
-  <button class="export-button" @click="confirmExport = true">
+  <button class="export-button" :disabled="!hasLineAndColumns" @click="confirmExport = true">
     <img src="./img/export.svg" width="12" height="12">
     Exportar tabela
 
